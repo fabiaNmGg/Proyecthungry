@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "poppins", sans-serif;
+
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: url('/restaurant.jpg')no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .wrapper {
+        width: 420px;
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(5px);
+        box-shadow: 0, 0, 10px rgba(0, 0, 0, .2);
+        color: #ffffff;
+        border-radius: 30px;
+        padding: 30px 40px;
+
+    }
+
+    .wrapper h1 {
+        font-size: 36px;
+        text-align: center;
+
+    }
+
+    .wrapper .input-box {
+        position: relative;
+        backdrop-filter: blur(3px);
+        width: 100%;
+        height: 50px;
+        margin: 30px 0;
+    }
+
+    .input-box input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: #fff;
+        padding: 20px 45px 20px 20px;
+    }
+
+    .input-box input::placeholder {
+        color: #fff;
+    }
+
+    .input-box i {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+    }
+
+    .wrapper .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14.5px;
+        margin: -15px 0 15px;
+    }
+
+    .remember-forgot label input {
+        accent-color: #fff;
+        margin-right: 3px;
+
+    }
+
+    .remember-forgot a {
+        color: #fff;
+        text-decoration: none;
+
+    }
+
+    .remember-forgot a:hover {
+        color: red;
+        text-decoration: underline;
+    }
+
+    .wrapper .btn {
+        width: 100%;
+        height: 45px;
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .wrapper .register-link {
+        font-size: 14.5px;
+        text-align: center;
+        margin: 20px 0 15px
+    }
+
+    .register-link h3 a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .register-link h3 a:hover {
+        color: red;
+        text-decoration: underline;
+    }
+
+
+
+    .formulario-crear-usuario.mostrar {
+        display: block;
+    }
+
+    .formulario-crear-usuario {
+        display: none;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    user agent stylesheet div {
+        display: block;
+        unicode-bidi: isolate;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <form action="" id="formInicioSesion">
+            <h1>Iniciar Sesión</h1>
+            <div class="input-box">
+                <input type="text" id="usuario" placeholder="Usuario" required>
+                <i class='bx bxs-user-circle'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="contraseña" placeholder="Contraseña" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox" required>Acuerdate de mí</label>
+                <a href="#">¿Has olvidado tu contraseña?</a>
+            </div>
+            <button type="submit" class="btn">Iniciar Sesión</button>
+            <div class="register-link">
+                <h3>¿No tienes una cuenta? <a href="#" id="btnMostrarCrearUsuario">Registrate</a></h3>
+            </div>
+            <div id="loginResult"></div>
+        </form>
+
+        <form action="" id="formCrearUsuario" style="display: none;">
+            <h1>Crear Usuario y Contraseña</h1>
+            <h2>Por motivos de seguridad nosotros le proveeremos un usuario y contraseña</h2>
+            <div class="input-box">
+                <input type="text" id="abc" placeholder="Ingrese un nombre y apellidos" required>
+                <i class='bx bxs-key'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" name="formularioDatos" id="d" placeholder="Ingrese su año de nacimiento" required>
+                <i class='bx bxs-key'></i>
+            </div>
+            <button type="submit" class="btn">Crear</button>
+            <div id="result"></div>
+            <div class="register-link">
+                <h3>¿Ya tienes una cuenta? <a href="#" id="btnMostrarIniciarSesion">Inicia sesión</a></h3>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formInicioSesion = document.getElementById('formInicioSesion');
+            const formCrearUsuario = document.getElementById('formCrearUsuario');
+            const btnMostrarCrearUsuario = document.getElementById('btnMostrarCrearUsuario');
+            const btnMostrarIniciarSesion = document.getElementById('btnMostrarIniciarSesion');
+
+            let generatedUsername = '';
+            let generatedPassword = '';
+
+            btnMostrarCrearUsuario.addEventListener('click', (event) => {
+                event.preventDefault();
+                formInicioSesion.style.display = 'none';
+                formCrearUsuario.style.display = 'block';
+            });
+
+            btnMostrarIniciarSesion.addEventListener('click', (event) => {
+                event.preventDefault();
+                formInicioSesion.style.display = 'block';
+                formCrearUsuario.style.display = 'none';
+            });
+
+            formCrearUsuario.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const abc = document.getElementById('abc').value.trim();
+                const d = document.getElementById('d').value.trim();
+
+                if (abc.length < 3 || d === '') {
+                    alert('Por favor, completa todos los campos y asegúrate de que la cadena tenga al menos 3 caracteres.');
+                    return;
+                }
+
+
+                const a = abc[0];
+                const b = abc[1];
+                const c = abc[2];
+
+                generatedUsername = createUsername(a, b, c, d);
+                generatedPassword = createPassword(a, b, c, d);
+
+                document.getElementById('result').innerHTML = `
+                    </br>
+                    <p>Sus llaves de ingreso son:</p>
+                    <p>Usuario: ${generatedUsername}</p>
+                    <p>Contraseña: ${generatedPassword}</p>
+                    </br>
+                    
+                `;
+                alert('GRACIAS POR UNIRTE A NOSOTROS Y PREOCURA GUARDAR BIEN TUS LLAVES DE ACCESO');
+            });
+
+            formInicioSesion.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const loginUser = document.getElementById('usuario').value.trim();
+                const loginPassword = document.getElementById('contraseña').value.trim();
+
+                if (loginUser === generatedUsername && loginPassword === generatedPassword) {
+                    document.getElementById('loginResult').innerHTML = '<p>Inicio de sesión exitoso</p>';
+
+                    setTimeout(() => {
+                        window.location.href = 'pagina_principal.html';
+                    }, 2000);   
+                } else {
+                    document.getElementById('loginResult').innerHTML = '<p>Usuario o contraseña incorrectos</p>';
+                }
+            });
+
+            function createUsername(a, b, c, d) {
+                return a.toLowerCase() + b.toLowerCase() + c.toLowerCase() + d.slice(2);
+            }
+
+            function createPassword(a, b, c, d) {
+                const cont = b + a;
+                let cad = '';
+                for (let i = 0; i < cont.length; i++) {
+                    if ('aeiou'.includes(cont[i].toLowerCase())) {
+                        cad += c.toLowerCase();
+                    } else {
+                        cad += cont[i].toLowerCase();
+                    }
+                }
+                return cad + d;
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

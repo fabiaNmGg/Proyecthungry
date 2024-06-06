@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/fuentes/Honey Crepes.otf">
+    <link rel="stylesheet" href="/fuentes/Honey Crepes.ttf">
+</head>
+<script src="/js/java.js"></script>
+<style>
+    body {
+        background: url("/piedra.jpg")no-repeat;
+        background-position: left;
+        background-size: cover;
+    }
+
+    h1 {
+        font-size: 70px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: rgb(255, 255, 255);
+        -webkit-text-stroke: 1px #ff7300;
+        text-shadow: 2px 2px 0 #000000, 6px 6px 0 #fffb00;
+        font-weight: 700;
+    }
+
+    .letra {
+        color: rgb(255, 255, 255);
+        line-height: 2;
+        font-weight: 700;
+    }
+
+    .aro {
+        position: absolute;
+    }
+
+    .aroba {
+        position: relative;
+        background-color: #d1caba;
+        top: 36px;
+        color: #000000;
+        left: -50px;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border: 0px solid #d1caba;
+        padding: 8px;
+    }
+
+    .enviar {
+        background-color: #000592;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        box-shadow: 0 0 20px #13008c, 0 0 40px #2f00ff, 0 0 60px #00008a;
+        animation: glow .5s ease-in-out infinite alternate;
+        transition: transform .1s ease;
+    }
+
+    .limpiar {
+        margin-left: 15px;
+        background-color: #920000;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+        animation: glow 1s ease-in-out infinite alternate;
+        transition: transform .1s ease;
+    }
+
+    /* Definición de la animación */
+    @keyframes glow {
+        from {
+            text-shadow: 0 0 50px #000000, 0 0 90px #000000, 0 0 1300px #000000;
+            /* Sombreado inicial */
+        }
+
+        to {
+            text-shadow: 0 0 900px #000000, 0 0 100px #000000, 0 0 190px #000000, 0 0 150px #000000;
+            /* Sombreado al brillar */
+        }
+    }
+
+    .enviar:hover,
+    .limpiar:hover {
+        transform: scale(1.1);
+        /* Agrandar al pasar el ratón por encima */
+    }
+</style>
+
+<body>
+    <div class="container mt-5">
+        <h1>PEDIDOS</h1>
+        <!-- Se agrega novalidate para que el navegador NO valide, sino lo haga bootstrap-->
+        <form>
+
+            <!--Dos Input tipo Texto en 2 columnas de 6-->
+            <div class="row">
+                <div class="col-md-6  mb-3">
+                    <label class="letra" for="input_name">Nombre:</label>
+                    <input type="text" id="input_name" class="form-control">
+                </div>
+                <div class="col-md-6  mb-3">
+                    <label class="letra" for="input_lastname">Apellido:</label>
+                    <input type="text" id="input_lastname" class="form-control">
+                </div>
+            </div>
+
+            <!-- Input libre, sin columnas. Ancho total NOTA: el email es un input group. revisar codigo ;) -->
+            <div class="row">
+
+                <div class="col-md-6  mb-3">
+                    <label class="letra" for="input_name">Dirección:</label>
+                    <input type="text" id="input_name" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="letra" for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" class="form-control">
+                </div>
+
+            </div>
+            <!--4 columnas con input de telefono, datalist que permite busqueda, select normal y un input tipo fecha-->
+
+            <div class="row">
+
+                <!--Una columna de 4, pero separada (offset) tambien de 4. Con 3 checkbox-->
+                <div class="row text-center">
+                    <div class="col-md-4 offset-md-4 mb-3">
+                        <label for="intereses" class="letra">Menu por ahora:</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" id="tecnologia" value="tecnologia" class="form-check-input">
+                            <label for="tecnologia" class="letra">Chorizo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" id="negocios" value="negocios" class="form-check-input">
+                            <label for="negocios" class="letra">Pollo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" id="arte" value="arte" class="form-check-input">
+                            <label for="arte" class="letra">Hamburguesa</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Un text area solito. Completamente centrado y de ancho completo-->
+
+                <textarea id="comentarios" class="form-control mb-3" rows="4" cols="30"></textarea>
+                <label for="comentarios" class="letra">Comentarios adicionales:</label>
+
+                <!-- Boton de tamaño grande (lg) y centrados por un div (No use columnas)-->
+                <div class="text-center">
+                    <button href="/final.html" type="submit" class="enviar">Enviar</button>
+                    <button type="reset" class="limpiar">limpiar</button>
+                </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script>
+        function mostrarValorRango(valor) {
+            // Mostrar el valor del rango en el elemento span
+            document.getElementById('valorRango').textContent = valor;
+        }
+    </script>
+</body>
+
+</html>
